@@ -19,9 +19,7 @@ QUnit.test('addAll ok test', function(assert) {
         'm@bond.com': 'tea',
         'james@bond.com': 'eshpressho'
     };
-
-
-    //assert.deepEqual(ds, obj, 'Passed!');
+    assert.deepEqual(ds.getAll(), obj, 'Passed!');
     assert.equal(Object.keys(ds.getAll()).length, 2, 'Passed!');
     assert.ok(Object.keys(ds.getAll()).length, 2, 'Passed!');
 });
@@ -36,4 +34,34 @@ QUnit.test('get ok test', function(assert) {
     assert.ok(ds.get('m@bond.com'), 'tea', 'Passed!');
     assert.equal(ds.get('m@bond.com'), 'tea', 'Passed!');
     assert.strictEqual(ds.get('m@bond.com'), 'tea', 'Passed!');
+});
+
+// QUnit test functions for Truck DataStore
+QUnit.test('Truck', function(assert) {
+
+    myTruck.createOrder({
+        emailAddress: 'me@goldfinger.com',
+        coffee: 'double mocha'
+    });
+    myTruck.createOrder({
+        emailAddress: 'dr@no.com',
+        coffee: 'decaf'
+    });
+    myTruck.createOrder({
+        emailAddress: 'm@bond.com',
+        coffee: 'earl grey'
+    });
+
+    var printOrders = myTruck.printOrders();
+    assert.deepEqual(printOrders, [
+        'me@goldfinger.com',
+        'dr@no.com',
+        'm@bond.com'
+    ], 'The Print Order values are same');
+    myTruck.deliverOrder('dr@no.com');
+    myTruck.deliverOrder('m@bond.com');
+    var printOrdersAfterDeletion = myTruck.printOrders();
+    assert.deepEqual(printOrdersAfterDeletion, [
+        'me@goldfinger.com'
+    ], ' values are me@goldfinger.com');
 });
