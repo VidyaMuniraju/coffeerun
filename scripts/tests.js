@@ -65,3 +65,9 @@ QUnit.test('Truck', function(assert) {
         'me@goldfinger.com'
     ], ' values are me@goldfinger.com');
 });
+
+
+/*
+1. Each function has console.log that creates problem when comparing it with an expected value.
+ 2. None function has return value that makes its return value "undefined" by default
+ */
